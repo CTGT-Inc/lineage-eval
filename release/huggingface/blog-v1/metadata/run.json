@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "release_id": "blog-v1",
+  "experiment": "blog-v1",
+  "benchmark_version": "matched_v2",
+  "generated_at_utc": "2026-07-28T00:21:38.213Z",
+  "finished_at_utc": "2026-07-27T21:31:36.127514+00:00",
+  "generation": {
+    "backend": "vllm",
+    "decoding": {
+      "temperature": 0,
+      "top_p": 1,
+      "max_tokens": 4096,
+      "seed": 0
+    },
+    "total_usd_gpu_compute": 13.61
+  },
+  "counts": {
+    "prompts": 304,
+    "concepts": 76,
+    "models": 6,
+    "responses": 1824,
+    "valid_responses": 1638,
+    "invalid_responses": 186,
+    "judges": 4,
+    "judgments": 7296,
+    "judgments_included_in_statistics": 6552,
+    "judgments_excluded_from_statistics": 744,
+    "human_annotations": 96,
+    "human_annotated_prompts": 24,
+    "complete_matched_gaps": 753
+  },
+  "model_keys": [
+    "gpt_oss_120b",
+    "self_distilled",
+    "v4_flash_distilled",
+    "v4_flash",
+    "gpt_oss_20b",
+    "expert_20b_self_sturev"
+  ],
+  "judge_models": [
+    "x-ai/grok-4.20",
+    "google/gemini-3.5-flash",
+    "openai/gpt-5-mini",
+    "anthropic/claude-sonnet-4.6"
+  ],
+  "quality": {
+    "invalid_label": "INVALID_DEGENERATE",
+    "invalid_reasons": {
+      "missing_output": 171,
+      "repeated_ngram": 13,
+      "repeated_character": 2
+    },
+    "invalid_responses_excluded_from_scores": true
+  },
+  "release_notes": [
+    "Reference cards are model-drafted research proxies and have not been independently fact-checked.",
+    "The human annotations are a partial pilot, not benchmark-wide ground truth.",
+    "Model answers, reasoning traces, citations, and judge rationales are unverified generated text.",
+    "Infrastructure paths, private adapter identifiers, unreleased arm names, and attempt-level resume metadata were removed."
+  ],
+  "source_artifact": {
+    "filename": "matched-v2-full-data.json",
+    "sha256": "654c5fb688bb0d0335f8751cedbd992c4be85bc7b979ccba24612411d001eea9"
+  }
+}

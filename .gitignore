@@ -1,0 +1,30 @@
+# Local credentials and environment overrides. Keep documented templates tracked.
+.env*
+!.env.example
+
+# Python environments, caches, coverage, and root-level package builds.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+/build/
+/dist/
+*.egg-info/
+
+# Private keys and local operating-system metadata.
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+
+# Resumable local generation, judge jobs, and analysis outputs.
+runs/
+
+# Generated upload archive; the unpacked Hugging Face release is canonical.
+/release/huggingface/*.zip

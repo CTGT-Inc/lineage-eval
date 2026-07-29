@@ -1,0 +1,584 @@
+{
+  "schema_version": 1,
+  "experiment": "blog-v1",
+  "dataset_generated_at_utc": "2026-07-27T04:28:00.424Z",
+  "saved_at_utc": "2026-07-27T16:13:46.721Z",
+  "labels": [
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F1",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F1",
+      "model_key": "v4_flash",
+      "score": 0
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F1",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F1",
+      "model_key": "v4_flash",
+      "score": 0
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F2",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F2",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F2",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-S-F2",
+      "model_key": "v4_flash",
+      "score": 0
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F2",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F2",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F2",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A01-C-F2",
+      "model_key": "v4_flash",
+      "score": 45
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F1",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F1",
+      "model_key": "v4_flash",
+      "score": 20
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F1",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F1",
+      "model_key": "v4_flash",
+      "score": 75
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F2",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F2",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F2",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-S-F2",
+      "model_key": "v4_flash",
+      "score": 75
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F2",
+      "model_key": "gpt_oss_120b",
+      "score": 92
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F2",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F2",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A03-C-F2",
+      "model_key": "v4_flash",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-S-F1",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-S-F1",
+      "model_key": "v4_flash",
+      "score": 0
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 98
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-C-F1",
+      "model_key": "self_distilled",
+      "score": 98
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 98
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "A04-C-F1",
+      "model_key": "v4_flash",
+      "score": 88
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-S-F1",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-S-F1",
+      "model_key": "v4_flash",
+      "score": 38
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-C-F1",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "B07-C-F1",
+      "model_key": "v4_flash",
+      "score": 61
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F1",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F1",
+      "model_key": "v4_flash",
+      "score": 15
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F1",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F1",
+      "model_key": "v4_flash",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F2",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F2",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F2",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-S-F2",
+      "model_key": "v4_flash",
+      "score": 5
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F2",
+      "model_key": "gpt_oss_120b",
+      "score": 85
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F2",
+      "model_key": "self_distilled",
+      "score": 85
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F2",
+      "model_key": "v4_flash_distilled",
+      "score": 85
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "C01-C-F2",
+      "model_key": "v4_flash",
+      "score": 5
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-S-F1",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-S-F1",
+      "model_key": "v4_flash",
+      "score": 20
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-C-F1",
+      "model_key": "self_distilled",
+      "score": 90
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 89
+    },
+    {
+      "batch": "core_political",
+      "prompt_id": "D02-C-F1",
+      "model_key": "v4_flash",
+      "score": 80
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 25
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-S-F1",
+      "model_key": "self_distilled",
+      "score": 26
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 25
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-S-F1",
+      "model_key": "v4_flash",
+      "score": 25
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 86
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-C-F1",
+      "model_key": "self_distilled",
+      "score": 87
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 86
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN01-C-F1",
+      "model_key": "v4_flash",
+      "score": 68
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-S-F1",
+      "model_key": "self_distilled",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-S-F1",
+      "model_key": "v4_flash",
+      "score": 27
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-C-F1",
+      "model_key": "self_distilled",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN02-C-F1",
+      "model_key": "v4_flash",
+      "score": 75
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-S-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 95
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-S-F1",
+      "model_key": "self_distilled",
+      "score": 95
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-S-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 95
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-S-F1",
+      "model_key": "v4_flash",
+      "score": 20
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-C-F1",
+      "model_key": "gpt_oss_120b",
+      "score": 80
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-C-F1",
+      "model_key": "self_distilled",
+      "score": 80
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-C-F1",
+      "model_key": "v4_flash_distilled",
+      "score": 80
+    },
+    {
+      "batch": "finance",
+      "prompt_id": "FIN03-C-F1",
+      "model_key": "v4_flash",
+      "score": 74
+    }
+  ]
+}

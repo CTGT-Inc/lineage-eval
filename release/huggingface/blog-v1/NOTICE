@@ -1,0 +1,19 @@
+Lineage Eval
+Copyright 2026 Siddarth Mamidanna
+
+The core-political benchmark inventory includes material derived from:
+
+  augmxnt/deccp
+  https://github.com/AUGMXNT/deccp
+  Upstream revision: 1a6d5571f0a711d3afb7d1c43f70a23e41c359a1
+  License: Apache License 2.0
+
+The upstream prompts were substantially modified and expanded for this work.
+Changes include concept selection and grouping, rewritten prompts, paired
+controls, task frames, sensitivity tiers, identifiers, and reference cards.
+The full core-political stratum is conservatively treated as derived from the
+upstream inventory because an exact row-level source map was not retained.
+
+The exact upstream license and modification notice are retained in
+THIRD_PARTY_NOTICES/. Model and service-provider names remain the property of
+their respective owners.

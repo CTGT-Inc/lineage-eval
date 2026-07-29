@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Lineage Eval, please cite this software and dataset release."
+title: "Lineage Eval"
+type: software
+authors:
+  - family-names: Mamidanna
+    given-names: Siddarth
+version: 1.0.0
+date-released: 2026-07-29
+license: Apache-2.0
+abstract: >-
+  A model-agnostic harness, matched benchmark, released generations,
+  automated judgments, and interactive viewer for evaluating selective
+  censorship behavior in language models.
+keywords:
+  - language-model-evaluation
+  - censorship
+  - matched-benchmark
+  - llm-as-a-judge

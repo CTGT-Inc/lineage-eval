@@ -1,0 +1,28 @@
+[project]
+name = "lineage-eval"
+version = "1.0.0"
+description = "Matched evaluation of censorship inheritance in hint-based distillation"
+requires-python = ">=3.12"
+authors = [
+    { name = "Siddarth Mamidanna" },
+]
+license = "Apache-2.0"
+license-files = [
+    "LICENSE",
+    "NOTICE",
+]
+dependencies = [
+    "httpx>=0.27",
+    "openai>=1.40,<3",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+lineage-eval = "censorship.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/censorship"]
