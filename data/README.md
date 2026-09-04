@@ -7,6 +7,7 @@ This release separates benchmark inputs from observed results:
 ```text
 benchmark/       Immutable matched-v2 prompt records
 results/blog-v1/ Released prompts, generations, judgments, run metadata, and statistics
+results/ox-alpha-v1/ Supplemental core-political Ox Alpha comparator release
 annotations/     Optional local human-label work; not used as headline ground truth
 ```
 
@@ -78,6 +79,15 @@ distributed: `self_distilled`, `v4_flash_distilled`, and
 inspection, but those generations cannot be independently regenerated from the
 public repository. The runnable harness is model-agnostic and evaluates any
 model name exposed by a user-managed OpenAI-compatible endpoint.
+
+The supplemental `ox-alpha-v1` release contains the existing 152
+core-political generations from the `stealth/ox-alpha` endpoint and the four-
+judge `cards_v1` panel used by the standalone site. Its underlying model
+provenance was undisclosed; it is a comparator with no identity or lineage
+claim. Its endpoint did not support `seed`, so the observations are not
+deterministically reproducible. The `cards_v2` matched-gap results are retained
+as a secondary analysis, without substituting them for the site-facing
+`cards_v1` judgments.
 
 ## License
 

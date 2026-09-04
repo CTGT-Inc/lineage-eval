@@ -1,0 +1,13 @@
+{
+  "model_key": "ox_alpha",
+  "display_name": "Ox Alpha",
+  "served_model": "stealth/ox-alpha",
+  "provider": "Stealth",
+  "role": "comparator",
+  "scope": "core_political",
+  "provenance_status": "undisclosed",
+  "lineage_claim": false,
+  "identity_claim": null,
+  "weights_included": false,
+  "reproducibility_note": "The endpoint did not support seed and its underlying model provenance was undisclosed. This release is an auditable observation, not a lineage claim."
+}

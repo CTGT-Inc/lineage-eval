@@ -5,7 +5,10 @@ results, and a read-only interactive viewer for the matched-v2 censorship
 evaluation.
 
 The released blog artifact contains 304 prompts, six model arms, 1,824
-responses, and 7,296 classifications from four LLM judges. The three trained
+responses, and 7,296 classifications from four LLM judges. A supplemental Ox
+Alpha comparator release adds 152 core-political generations and 604
+`cards_v1` classifications; its endpoint provenance was undisclosed and it
+carries no lineage claim. The three trained
 adapters used in the study are not distributed. Their completed outputs can be
 audited in the viewer, but the adapter generations and headline comparison
 cannot be regenerated from this public repository.
@@ -136,6 +139,7 @@ configs/eval.toml       Benchmark, endpoint defaults, decoding, and judge panel
 src/censorship/         Endpoint generation, judging, and matched analysis
 data/benchmark/         Immutable matched-v2 prompt sets
 data/results/blog-v1/   Canonical six-arm blog/viewer artifact
+data/results/ox-alpha-v1/  Supplemental Ox Alpha comparator observations
 viewer/                 Read-only released-results browser
 docs/                   Methodology, runtime, and release notes
 tests/                  Platform-independent Python tests
