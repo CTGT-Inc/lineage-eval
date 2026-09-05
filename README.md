@@ -10,6 +10,19 @@ adapters used in the study are not distributed. Their completed outputs can be
 audited in the viewer, but the adapter generations and headline comparison
 cannot be regenerated from this public repository.
 
+The downloadable response table also includes 152 core-political responses
+from GLM 5.3 (Ox Alpha), served as `stealth/ox-alpha`. It is a comparator with
+undisclosed underlying provenance and no verified identity or lineage claim.
+It is not added to the six-arm viewer or the blog statistics.
+
+## Download the released responses
+
+All 1,976 response rows use one schema under
+`release/huggingface/blog-v1/data/responses/`. GLM 5.3 (Ox Alpha) can be
+downloaded directly from `data/responses/ox-alpha.jsonl` within that release.
+The checked-in source rows are also available at
+`data/results/ox-alpha-v1/responses.jsonl` in the same schema.
+
 ## Browse the released results
 
 The viewer requires Node.js 22.13 or newer. It does not need Python, a GPU,
@@ -136,6 +149,7 @@ configs/eval.toml       Benchmark, endpoint defaults, decoding, and judge panel
 src/censorship/         Endpoint generation, judging, and matched analysis
 data/benchmark/         Immutable matched-v2 prompt sets
 data/results/blog-v1/   Canonical six-arm blog/viewer artifact
+data/results/ox-alpha-v1/  Normalized Ox Alpha comparator responses
 viewer/                 Read-only released-results browser
 docs/                   Methodology, runtime, and release notes
 tests/                  Platform-independent Python tests

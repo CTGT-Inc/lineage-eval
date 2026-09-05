@@ -32,6 +32,10 @@ const destination = resolve(
   process.argv[4] ??
     join(repositoryRoot, "release/huggingface/blog-v1"),
 );
+const supplementalResponsesPath = resolve(
+  process.argv[5] ??
+    join(repositoryRoot, "data/results/ox-alpha-v1/responses.jsonl"),
+);
 const datasetCardPath = join(
   repositoryRoot,
   "release/huggingface/DATASET_CARD.md",
@@ -65,6 +69,12 @@ await cp(thirdPartyNoticesPath, join(outputRoot, "THIRD_PARTY_NOTICES"), {
 const sourceBytes = await readFile(sourcePath);
 const source = JSON.parse(sourceBytes.toString("utf8"));
 const annotations = JSON.parse(await readFile(annotationsPath, "utf8"));
+const supplementalResponseBytes = await readFile(supplementalResponsesPath);
+const supplementalResponseRows = supplementalResponseBytes
+  .toString("utf8")
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => JSON.parse(line));
 const sanitizedStatistics = structuredClone(source.statistics);
 const topicAnalysisCost =
   sanitizedStatistics?.degeneracy?.topic_conditional_test?.cost;
@@ -202,6 +212,15 @@ for (const prompt of source.prompts) {
   }
 }
 
+validateSupplementalResponses({
+  rows: supplementalResponseRows,
+  existingRows: responseRows,
+  prompts: source.prompts,
+});
+const publishedResponseRows = [...responseRows, ...supplementalResponseRows];
+
+const publishedModelKeys = [...source.models, "ox_alpha"];
+
 const humanAnnotationRows = annotations.labels.map((label) => {
   const prompt = promptById.get(label.prompt_id);
   if (!prompt) {
@@ -224,7 +243,7 @@ const humanAnnotationRows = annotations.labels.map((label) => {
   };
 });
 
-const invalidResponses = responseRows.filter(
+const invalidResponses = publishedResponseRows.filter(
   (row) => !row.included_in_statistics,
 );
 const completeMatchedGaps =
@@ -250,9 +269,9 @@ const runMetadata = {
   counts: {
     prompts: benchmarkRows.length,
     concepts: new Set(benchmarkRows.map((row) => row.concept_id)).size,
-    models: source.models.length,
-    responses: responseRows.length,
-    valid_responses: responseRows.length - invalidResponses.length,
+    models: publishedModelKeys.length,
+    responses: publishedResponseRows.length,
+    valid_responses: publishedResponseRows.length - invalidResponses.length,
     invalid_responses: invalidResponses.length,
     judges: source.judges.length,
     judgments: judgmentRows.length,
@@ -268,7 +287,7 @@ const runMetadata = {
     ).size,
     complete_matched_gaps: completeMatchedGaps,
   },
-  model_keys: source.models,
+  model_keys: publishedModelKeys,
   judge_models: source.judges.map((judge) => judge.model),
   quality: {
     invalid_label: "INVALID_DEGENERATE",
@@ -288,10 +307,21 @@ const runMetadata = {
     "The human annotations are a partial pilot, not benchmark-wide ground truth.",
     "Model answers, reasoning traces, citations, and judge rationales are unverified generated text.",
     "Infrastructure paths, private adapter identifiers, unreleased arm names, and attempt-level resume metadata were removed.",
+    "GLM 5.3 (Ox Alpha) is a core-political-only comparator served as stealth/ox-alpha; its underlying provenance was undisclosed and no verified identity or lineage claim is made.",
   ],
   source_artifact: {
     filename: sourcePath.split("/").at(-1),
     sha256: createHash("sha256").update(sourceBytes).digest("hex"),
+  },
+  supplemental_response_artifact: {
+    filename: relative(repositoryRoot, supplementalResponsesPath),
+    sha256: createHash("sha256")
+      .update(supplementalResponseBytes)
+      .digest("hex"),
+    source_repository: "CTGT-Inc/research-censorship-distillation",
+    source_commit: "0d61229f760521ff169f76740f154471fcda8ea7",
+    source_path:
+      "experiments/026_card_standard_rejudge/data/ox_alpha_responses.jsonl",
   },
 };
 
@@ -312,6 +342,22 @@ const models = source.models.map((modelKey) => ({
     ? "Adapter weights are not distributed; this row is an auditable observation only."
     : "Weights are not bundled with this dataset; reproduce with a separately obtained compatible model.",
 }));
+models.push({
+  release_id: "ox-alpha-v1",
+  model_key: "ox_alpha",
+  display_name: "GLM 5.3 (Ox Alpha)",
+  served_model: "stealth/ox-alpha",
+  result_type: "observed_generation",
+  weights_included: false,
+  is_adapter_arm: false,
+  adapter_weights_available: null,
+  scope: "core_political",
+  provenance_status: "undisclosed",
+  identity_claim: null,
+  lineage_claim: false,
+  reproducibility_note:
+    "The endpoint did not support seed and its underlying model provenance was undisclosed. This is a comparator observation, not a lineage claim.",
+});
 
 const judges = source.judges.map((judge) => ({
   release_id: releaseId,
@@ -356,6 +402,10 @@ await writeJsonl(
   responseRows,
 );
 await writeJsonl(
+  join(outputRoot, "data/responses/ox-alpha.jsonl"),
+  supplementalResponseRows,
+);
+await writeJsonl(
   join(outputRoot, "data/judgments/evaluation.jsonl"),
   judgmentRows,
 );
@@ -397,7 +447,7 @@ await writeJson(join(outputRoot, "MANIFEST.json"), {
   source_generated_at_utc: source.generated_at_utc,
   row_counts: {
     benchmark: benchmarkRows.length,
-    responses: responseRows.length,
+    responses: publishedResponseRows.length,
     judgments: judgmentRows.length,
     human_annotations: humanAnnotationRows.length,
     models: models.length,
@@ -413,7 +463,7 @@ console.log(
   [
     `Wrote Hugging Face release to ${destination}`,
     `${benchmarkRows.length} benchmark rows`,
-    `${responseRows.length} response rows`,
+    `${publishedResponseRows.length} response rows`,
     `${judgmentRows.length} judgment rows`,
     `${humanAnnotationRows.length} human annotation rows`,
   ].join("\n"),
@@ -459,4 +509,58 @@ async function listFiles(directory) {
     }
   }
   return paths;
+}
+
+function validateSupplementalResponses({ rows, existingRows, prompts }) {
+  const expectedFields = Object.keys(existingRows[0]);
+  const expectedPromptIds = new Set(
+    prompts
+      .filter((prompt) => prompt.stratum === "core_political")
+      .map((prompt) => prompt.prompt_id),
+  );
+  const responseIds = new Set();
+  const promptIds = new Set();
+
+  if (rows.length !== 152) {
+    throw new Error(`Expected 152 Ox Alpha responses, found ${rows.length}`);
+  }
+
+  for (const row of rows) {
+    if (JSON.stringify(Object.keys(row)) !== JSON.stringify(expectedFields)) {
+      throw new Error(
+        `Ox Alpha response ${row.response_id ?? "<unknown>"} does not match the published response schema`,
+      );
+    }
+    if (
+      row.release_id !== "ox-alpha-v1" ||
+      row.experiment !== "026_card_standard_rejudge" ||
+      row.benchmark_version !== "matched_v2" ||
+      row.model_key !== "ox_alpha" ||
+      row.response_id !== `${row.prompt_id}::ox_alpha`
+    ) {
+      throw new Error(`Invalid Ox Alpha identity fields for ${row.prompt_id}`);
+    }
+    responseIds.add(row.response_id);
+    promptIds.add(row.prompt_id);
+  }
+
+  if (
+    responseIds.size !== rows.length ||
+    promptIds.size !== expectedPromptIds.size ||
+    [...promptIds].some((promptId) => !expectedPromptIds.has(promptId))
+  ) {
+    throw new Error("Ox Alpha responses must cover the core-political prompts exactly once");
+  }
+
+  const valid = rows.filter(
+    (row) => row.response_quality_label === "VALID",
+  );
+  const invalid = rows.filter(
+    (row) => row.response_quality_label === "INVALID_DEGENERATE",
+  );
+  if (valid.length !== 151 || invalid.length !== 1) {
+    throw new Error(
+      `Expected 151 valid and 1 invalid Ox Alpha response; found ${valid.length} and ${invalid.length}`,
+    );
+  }
 }

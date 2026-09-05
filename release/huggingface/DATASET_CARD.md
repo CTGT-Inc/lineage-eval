@@ -34,8 +34,8 @@ configs:
 
 Matched evaluation data for studying selective censorship behavior in language
 models. This release contains the benchmark, observed generations from six
-model arms, four automated judgments per generation, and a small pilot of human
-scores.
+study arms, four automated judgments per study-arm generation, a small pilot of
+human scores, and 152 downloadable GLM 5.3 (Ox Alpha) comparator responses.
 
 This is an evaluation dataset. Every configuration has a single `evaluation`
 split; no train/test split is implied.
@@ -45,7 +45,7 @@ split; no train/test split is implied.
 | Configuration | Rows | Unit |
 |---|---:|---|
 | `benchmark` | 304 | One matched-v2 prompt |
-| `responses` | 1,824 | One model response to one prompt |
+| `responses` | 1,976 | One model response to one prompt |
 | `judgments` | 7,296 | One automated judgment of one response |
 | `human_annotations` | 96 | One pilot human score |
 
@@ -59,10 +59,10 @@ responses = load_dataset("OWNER/DATASET", "responses", split="evaluation")
 judgments = load_dataset("OWNER/DATASET", "judgments", split="evaluation")
 ```
 
-Join `benchmark` to `responses` with `prompt_id`, and join `responses` to
-`judgments` with `response_id`. `benchmark_version`, `release_id`, and
-`prompt_version` should be retained when combining this release with later
-versions.
+Join `benchmark` to `responses` with `prompt_id`, and join study-arm responses
+to `judgments` with `response_id`. The judgment table covers the original six
+arms; it does not include GLM 5.3 (Ox Alpha). `benchmark_version`, `release_id`, and
+`prompt_version` should be retained when combining releases.
 
 ## Benchmark design
 
@@ -103,10 +103,12 @@ scores and `included_in_statistics = false`.
 | `v4_flash` | 304 | 0 | 0.0% | 0 |
 | `gpt_oss_20b` | 304 | 95 | 31.2% | 131 |
 | `expert_20b_self_sturev` | 304 | 84 | 27.6% | 128 |
+| `ox_alpha` | 152 | 1 | 0.7% | 1 |
 
-In total, 186 of 1,824 responses are invalid and excluded from headline score
-aggregates. Of the 7,296 raw judgments, 6,552 are included and 744 are retained
-for provenance but excluded from aggregates.
+In total, 187 of 1,976 responses are invalid. Of the 7,296 raw judgments for
+the original study arms, 6,552 are included and 744 are retained for provenance
+but excluded from aggregates. GLM 5.3 (Ox Alpha) covers only the
+core-political stratum and is not part of the six-arm blog statistics.
 
 ## Human annotations
 
@@ -133,12 +135,18 @@ experiment arms, and resumable attempt-level metadata have been removed.
 Sanitized aggregate metadata is in `metadata/run.json`; model and judge indexes
 are in `metadata/models.jsonl` and `metadata/judges.jsonl`.
 
+GLM 5.3 (Ox Alpha) was served separately as `stealth/ox-alpha` with
+`temperature=0`, `top_p=1`, and `max_tokens=32768`; the endpoint did not
+support `seed`. Its underlying model provenance was undisclosed. It is included
+strictly as a comparator, with no verified identity or lineage claim.
+
 ## Reasoning traces and generated content
 
 The `responses` configuration includes the reasoning text returned by the
-source serving stack. Five of the six model arms have reasoning text for all
-304 responses; `v4_flash` has none. Downstream users who do not need it should
-drop the `reasoning` column.
+source serving stacks. Five of the six study arms have reasoning text for all
+304 responses; `v4_flash` has none. The GLM 5.3 (Ox Alpha) rows also include
+returned reasoning text. Downstream users who do not need it should drop the
+`reasoning` column.
 
 Answers, reasoning traces, citations, judge rationales, and lists of covered or
 omitted claims are generated text. They may contain factual errors, fabricated

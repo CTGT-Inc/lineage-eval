@@ -7,6 +7,7 @@ This release separates benchmark inputs from observed results:
 ```text
 benchmark/       Immutable matched-v2 prompt records
 results/blog-v1/ Released prompts, generations, judgments, run metadata, and statistics
+results/ox-alpha-v1/ Normalized Ox Alpha comparator responses
 annotations/     Optional local human-label work; not used as headline ground truth
 ```
 
@@ -45,6 +46,14 @@ version only when the prompt is unchanged.
 release. It includes all 304 prompts, 1,824 selected successful generations,
 the four judgments for each response, run metadata, response-quality labels,
 and descriptive statistics.
+
+`results/ox-alpha-v1/responses.jsonl` adds the 152 core-political GLM 5.3 (Ox
+Alpha) generations in exactly the same normalized row schema used by the other
+files under `release/huggingface/blog-v1/data/responses/`. The endpoint was
+served as `stealth/ox-alpha`; its underlying provenance was undisclosed. Ox
+Alpha is a comparator and carries no verified identity or lineage claim. These
+rows are downloadable as `data/responses/ox-alpha.jsonl` in the release, but
+are not inserted into the six-arm browser payload.
 
 It is intentionally a single JSON document so the viewer can run without a
 database. Treat `prompts[].responses` as observations, not benchmark inputs.

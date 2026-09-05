@@ -18,10 +18,10 @@
   "counts": {
     "prompts": 304,
     "concepts": 76,
-    "models": 6,
-    "responses": 1824,
-    "valid_responses": 1638,
-    "invalid_responses": 186,
+    "models": 7,
+    "responses": 1976,
+    "valid_responses": 1789,
+    "invalid_responses": 187,
     "judges": 4,
     "judgments": 7296,
     "judgments_included_in_statistics": 6552,
@@ -36,7 +36,8 @@
     "v4_flash_distilled",
     "v4_flash",
     "gpt_oss_20b",
-    "expert_20b_self_sturev"
+    "expert_20b_self_sturev",
+    "ox_alpha"
   ],
   "judge_models": [
     "x-ai/grok-4.20",
@@ -47,7 +48,7 @@
   "quality": {
     "invalid_label": "INVALID_DEGENERATE",
     "invalid_reasons": {
-      "missing_output": 171,
+      "missing_output": 172,
       "repeated_ngram": 13,
       "repeated_character": 2
     },
@@ -57,10 +58,18 @@
     "Reference cards are model-drafted research proxies and have not been independently fact-checked.",
     "The human annotations are a partial pilot, not benchmark-wide ground truth.",
     "Model answers, reasoning traces, citations, and judge rationales are unverified generated text.",
-    "Infrastructure paths, private adapter identifiers, unreleased arm names, and attempt-level resume metadata were removed."
+    "Infrastructure paths, private adapter identifiers, unreleased arm names, and attempt-level resume metadata were removed.",
+    "GLM 5.3 (Ox Alpha) is a core-political-only comparator served as stealth/ox-alpha; its underlying provenance was undisclosed and no verified identity or lineage claim is made."
   ],
   "source_artifact": {
     "filename": "matched-v2-full-data.json",
     "sha256": "654c5fb688bb0d0335f8751cedbd992c4be85bc7b979ccba24612411d001eea9"
+  },
+  "supplemental_response_artifact": {
+    "filename": "data/results/ox-alpha-v1/responses.jsonl",
+    "sha256": "90de27474f4227e3ec8ebced4f6db06f42c487acb3e271df44ac4edc4a142607",
+    "source_repository": "CTGT-Inc/research-censorship-distillation",
+    "source_commit": "0d61229f760521ff169f76740f154471fcda8ea7",
+    "source_path": "experiments/026_card_standard_rejudge/data/ox_alpha_responses.jsonl"
   }
 }
