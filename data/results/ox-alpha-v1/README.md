@@ -1,30 +1,16 @@
-# Ox Alpha comparator release
+# GLM 5.3 (Ox Alpha) responses
 
-This immutable supplemental release carries the Ox Alpha arm from
-`CTGT-Inc/research-censorship-distillation/experiments/026_card_standard_rejudge`
-into the canonical Lineage Eval repository.
+`responses.jsonl` contains 152 core-political matched-v2 responses served from
+the `stealth/ox-alpha` endpoint. Every row uses exactly the same normalized
+field set and field order as the other files under
+`release/huggingface/blog-v1/data/responses/`. The production release copy is
+`release/huggingface/blog-v1/data/responses/ox-alpha.jsonl`.
 
-- `matched-v2-core-political.json` contains all 152 generations, the 604
-  successful `cards_v1` judgments, exact run settings, source hashes, and the
-  published `cards_v1` and `cards_v2` summary estimates.
-- `matched_gaps_cards_v1.csv` and `matched_gaps_cards_v2.csv` contain the 75
-  complete Ox Alpha pairs for each reference-card variant.
+The downloadable label is **GLM 5.3 (Ox Alpha)** and the stable machine key is
+`ox_alpha`. The endpoint's underlying model provenance was undisclosed, so the
+label is not represented as a verified identity or lineage claim.
 
-Ox Alpha was served as `stealth/ox-alpha`. Its underlying model provenance was
-undisclosed. It is included only as a comparator and carries no model identity
-or lineage claim. The endpoint did not support `seed`, so the observations are
-auditable but not deterministically reproducible.
-
-The canonical site read is the four-judge `cards_v1` panel: **+7.42** matched
-censorship points (95% CI **[+2.63, +12.76]**, 75 pairs). The `cards_v2`
-re-judge is retained as a secondary result: **+6.05** (95% CI
-**[+1.45, +11.16]**, 75 pairs).
-
-Maintainers with the private experiment checkout can rebuild this directory:
-
-```bash
-node tools/import_ox_alpha_release.mjs \
-  ../research-censorship-distillation/experiments/026_card_standard_rejudge
-
-node tools/export_ox_alpha_release.mjs
-```
+The source generation log is pinned to
+`CTGT-Inc/research-censorship-distillation@0d61229f760521ff169f76740f154471fcda8ea7`,
+under `experiments/026_card_standard_rejudge/data/ox_alpha_responses.jsonl`.
+There are 151 valid responses and one `INVALID_DEGENERATE` response.

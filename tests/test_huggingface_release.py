@@ -22,6 +22,9 @@ SOURCE_PATH = (
 ANNOTATIONS_PATH = (
     REPOSITORY_ROOT / "data" / "annotations" / "blog-v1" / "human-labels.json"
 )
+OX_ALPHA_RESPONSES_PATH = (
+    REPOSITORY_ROOT / "data" / "results" / "ox-alpha-v1" / "responses.jsonl"
+)
 EXPORTER_PATH = REPOSITORY_ROOT / "tools" / "export_huggingface_release.mjs"
 
 
@@ -37,9 +40,11 @@ class HuggingFaceReleaseTest(unittest.TestCase):
         cls.benchmark = read_jsonl(
             RELEASE_ROOT / "data" / "benchmark" / "evaluation.jsonl"
         )
-        cls.responses = read_jsonl(
-            RELEASE_ROOT / "data" / "responses" / "evaluation.jsonl"
-        )
+        cls.responses = [
+            row
+            for path in sorted((RELEASE_ROOT / "data" / "responses").glob("*.jsonl"))
+            for row in read_jsonl(path)
+        ]
         cls.judgments = read_jsonl(
             RELEASE_ROOT / "data" / "judgments" / "evaluation.jsonl"
         )
@@ -57,13 +62,13 @@ class HuggingFaceReleaseTest(unittest.TestCase):
 
     def test_counts_and_unique_keys(self) -> None:
         self.assertEqual(len(self.benchmark), 304)
-        self.assertEqual(len(self.responses), 1_824)
+        self.assertEqual(len(self.responses), 1_976)
         self.assertEqual(len(self.judgments), 7_296)
         self.assertEqual(len(self.human_annotations), 96)
 
         self.assertEqual(len({row["prompt_id"] for row in self.benchmark}), 304)
         self.assertEqual(
-            len({row["response_id"] for row in self.responses}), 1_824
+            len({row["response_id"] for row in self.responses}), 1_976
         )
         self.assertEqual(
             len({row["judgment_id"] for row in self.judgments}), 7_296
@@ -86,8 +91,8 @@ class HuggingFaceReleaseTest(unittest.TestCase):
             all(row["response_id"] in response_ids for row in self.judgments)
         )
         self.assertEqual(
-            set(Counter(row["prompt_id"] for row in self.responses).values()),
-            {6},
+            Counter(Counter(row["prompt_id"] for row in self.responses).values()),
+            {6: 152, 7: 152},
         )
         self.assertEqual(
             set(Counter(row["response_id"] for row in self.judgments).values()),
@@ -110,8 +115,8 @@ class HuggingFaceReleaseTest(unittest.TestCase):
             row for row in self.judgments if not row["included_in_statistics"]
         ]
 
-        self.assertEqual(len(valid), 1_638)
-        self.assertEqual(len(invalid), 186)
+        self.assertEqual(len(valid), 1_789)
+        self.assertEqual(len(invalid), 187)
         self.assertEqual(len(included_judgments), 6_552)
         self.assertEqual(len(excluded_judgments), 744)
         self.assertTrue(all(row["included_in_statistics"] for row in valid))
@@ -215,10 +220,10 @@ class HuggingFaceReleaseTest(unittest.TestCase):
             manifest["row_counts"],
             {
                 "benchmark": 304,
-                "responses": 1_824,
+                "responses": 1_976,
                 "judgments": 7_296,
                 "human_annotations": 96,
-                "models": 6,
+                "models": 7,
                 "judges": 4,
             },
         )
@@ -234,6 +239,38 @@ class HuggingFaceReleaseTest(unittest.TestCase):
             self.run_metadata["source_artifact"]["sha256"],
             hashlib.sha256(SOURCE_PATH.read_bytes()).hexdigest(),
         )
+        self.assertEqual(
+            self.run_metadata["supplemental_response_artifact"]["sha256"],
+            hashlib.sha256(OX_ALPHA_RESPONSES_PATH.read_bytes()).hexdigest(),
+        )
+
+    def test_ox_alpha_rows_match_the_published_response_schema(self) -> None:
+        source_rows = read_jsonl(OX_ALPHA_RESPONSES_PATH)
+        released_rows = [
+            row for row in self.responses if row["model_key"] == "ox_alpha"
+        ]
+        other_rows = [
+            row for row in self.responses if row["model_key"] != "ox_alpha"
+        ]
+
+        self.assertEqual(released_rows, source_rows)
+        self.assertEqual(len(released_rows), 152)
+        self.assertEqual(
+            {tuple(row.keys()) for row in released_rows},
+            {tuple(other_rows[0].keys())},
+        )
+        self.assertEqual(
+            Counter(row["response_quality_label"] for row in released_rows),
+            {"VALID": 151, "INVALID_DEGENERATE": 1},
+        )
+
+        models = read_jsonl(RELEASE_ROOT / "metadata" / "models.jsonl")
+        ox_alpha = next(row for row in models if row["model_key"] == "ox_alpha")
+        self.assertEqual(ox_alpha["display_name"], "GLM 5.3 (Ox Alpha)")
+        self.assertEqual(ox_alpha["served_model"], "stealth/ox-alpha")
+        self.assertEqual(ox_alpha["provenance_status"], "undisclosed")
+        self.assertIsNone(ox_alpha["identity_claim"])
+        self.assertFalse(ox_alpha["lineage_claim"])
 
     def test_license_and_provenance_are_packaged(self) -> None:
         card = (RELEASE_ROOT / "README.md").read_text(encoding="utf-8")

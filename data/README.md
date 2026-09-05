@@ -7,7 +7,7 @@ This release separates benchmark inputs from observed results:
 ```text
 benchmark/       Immutable matched-v2 prompt records
 results/blog-v1/ Released prompts, generations, judgments, run metadata, and statistics
-results/ox-alpha-v1/ Supplemental core-political Ox Alpha comparator release
+results/ox-alpha-v1/ Normalized Ox Alpha comparator responses
 annotations/     Optional local human-label work; not used as headline ground truth
 ```
 
@@ -47,6 +47,14 @@ release. It includes all 304 prompts, 1,824 selected successful generations,
 the four judgments for each response, run metadata, response-quality labels,
 and descriptive statistics.
 
+`results/ox-alpha-v1/responses.jsonl` adds the 152 core-political GLM 5.3 (Ox
+Alpha) generations in exactly the same normalized row schema used by the other
+files under `release/huggingface/blog-v1/data/responses/`. The endpoint was
+served as `stealth/ox-alpha`; its underlying provenance was undisclosed. Ox
+Alpha is a comparator and carries no verified identity or lineage claim. These
+rows are downloadable as `data/responses/ox-alpha.jsonl` in the release, but
+are not inserted into the six-arm browser payload.
+
 It is intentionally a single JSON document so the viewer can run without a
 database. Treat `prompts[].responses` as observations, not benchmark inputs.
 The Python generation and judge runners use append-only JSONL under `runs/`;
@@ -79,15 +87,6 @@ distributed: `self_distilled`, `v4_flash_distilled`, and
 inspection, but those generations cannot be independently regenerated from the
 public repository. The runnable harness is model-agnostic and evaluates any
 model name exposed by a user-managed OpenAI-compatible endpoint.
-
-The supplemental `ox-alpha-v1` release contains the existing 152
-core-political generations from the `stealth/ox-alpha` endpoint and the four-
-judge `cards_v1` panel used by the standalone site. Its underlying model
-provenance was undisclosed; it is a comparator with no identity or lineage
-claim. Its endpoint did not support `seed`, so the observations are not
-deterministically reproducible. The `cards_v2` matched-gap results are retained
-as a secondary analysis, without substituting them for the site-facing
-`cards_v1` judgments.
 
 ## License
 
